@@ -6,8 +6,8 @@ const request = supertest(`http://localhost:8080`);
 
 describe("Testing adoptions", () => {
   it("Post debe devolver 201 porque creó una adopción", async () => {
-    const uid = "67e1d5edf6807ab17966789e";
-    const pid = "67e1d5cbf6807ab17966789b";
+    const uid = "67e22c8ee7cd5d8dbca15378";
+    const pid = "67e61537e609617359748708";
     await request.patch(`/api/pets/${pid}`).send({ adopted: false });
     await request.put(`/api/users/${uid}`).send({ pets: [] });
     const { statusCode, ok, _body } = await request.post(
@@ -39,8 +39,8 @@ describe("Testing adoptions", () => {
     expect(_body).to.have.property("status", "error");
   });
   it("GET /adoptions/:aid debe devolver 200 con un ID valido", async () => {
-    const uid = "67e1d5edf6807ab17966789e";
-    const pid = "67e1d5cbf6807ab17966789b";
+    const uid = "67e22c8ee7cd5d8dbca15378";
+    const pid = "67e61537e609617359748708";
     await request.patch(`/api/pets/${pid}`).send({ adopted: false });
     await request.put(`/api/users/${uid}`).send({ pets: [] });
     const { statusCode, ok, _body } = await request.post(
@@ -70,8 +70,8 @@ describe("Testing adoptions", () => {
     expect(_body).to.have.property("status", "error");
   });
   it("POST /adoptions/:uid/:pid debe devolver 404 cuando no encuentre un usuario", async () => {
-    const uid = "67e1d5edf6807ab17944489e";
-    const pid = "67e1d5cbf6807ab17966789b";
+    const uid = "67e22c8ee7cd5d8dbca15378";
+    const pid = "67e61537e609617359748708";
     await request.put(`/api/users/${uid}`).send({ pets: [] });
     const { statusCode, ok, _body } = await request.post(
       `/api/adoptions/${uid}/${pid}`
@@ -81,8 +81,8 @@ describe("Testing adoptions", () => {
     expect(_body).to.have.property("status", "error");
   });
   it("POST /adoptions/:uid/:pid debe devolver 404 cuando no encuentre una mascota", async () => {
-    const uid = "67e1d5edf6807ab17966789e";
-    const pid = "67e1d5cbf6807ab17964444b";
+    const uid = "67e22c8ee7cd5d8dbca15378";
+    const pid = "67e61537e609617359748708";
     await request.put(`/api/users/${uid}`).send({ pets: [] });
     const { statusCode, ok, _body } = await request.post(
       `/api/adoptions/${uid}/${pid}`
@@ -92,8 +92,8 @@ describe("Testing adoptions", () => {
     expect(_body).to.have.property("status", "error");
   });
   it("POST /adoptions/:uid/:pid debe devolver 400 cuando la mascota ya fue adoptada", async () => {
-    const uid = "67e1d5edf6807ab17966789e";
-    const pid = "67e1d5cbf6807ab17966789b";
+    const uid = "67e22c8ee7cd5d8dbca15378";
+    const pid = "67e61537e609617359748708";
     await request.patch(`/api/pets/${pid}`).send({ adopted: true });
     await request.put(`/api/users/${uid}`).send({ pets: [] });
     const { statusCode, ok, _body } = await request.post(
